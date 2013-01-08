@@ -1,3 +1,8 @@
 (ns tictactoe.player)
 
-(defn find-player [] 1)
+(defprotocol CanPlay
+	(marker [this]))
+
+(defrecord Player [marker]
+	CanPlay
+	(marker [this] (:marker this)))
