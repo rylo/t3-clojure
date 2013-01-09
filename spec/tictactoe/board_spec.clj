@@ -76,6 +76,11 @@
 			(let [empty-board (make-board 9 nil) full-board (make-board 9 "x") full-row-vector [[1 2 3][4 5 6][7 8 9][1 4 7][2 5 8][3 6 9][1 5 9][3 5 7]]]
 				(should= false (taken-row-present? empty-board full-row-vector))
 				(should= true (taken-row-present? full-board full-row-vector)))))
+				
+	(context "generate-rows"
+		(it "returns a vector of row vectors"
+			(let [board (make-board 9 nil) full-row-vector [[1 2 3][4 5 6][7 8 9][1 4 7][2 5 8][3 6 9][1 5 9][3 5 7]]]
+				(should= full-row-vector (generate-rows)))))
 
 )
 
