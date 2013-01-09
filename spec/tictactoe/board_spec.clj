@@ -52,15 +52,31 @@
 	(it "returns the board's diagonal rows" 
 		(let [board (make-board 9 "0") row-guide [[1 5 9] [3 5 7]]] 
 			(should= [["0" "x" "0"] ["0" "x" "0"]] (get-rows (set-marker board "x" 5) row-guide))))
-			
-	(it "returns false if the a spot is nil" 
-		(let [board (make-board 9 nil)]
-			(should= false (row-won? board (get-rows board [[1 2 3]]) "x"))))
-						
+
+	(context "row-taken?"
+		(it "returns false if the row doesn't contain 3 of the same string" 
+			(let [board (make-board 9 nil) row [1 2 3]]
+				(should= false (row-taken? board row))))
+				
+		(it "returns true if the row contains 3 of the same string" 
+			(let [board (make-board 9 "x") row [1 2 3]]
+				(should= true (row-taken? board row)))))
+
+	(context "row-taken-by?"
+		(it "returns false if the row doesn't contain 3 of the same string" 
+			(let [board (make-board 9 nil) row (get-rows board [[1 2 3]])]
+				(should= false (row-taken-by? "x" board row))))
+
+		(it "returns true if the row contains 3 of the same string" 
+			(let [board (make-board 9 "x") row (get-rows board [[1 2 3]])]
+				(should= true (row-taken-by? "x" board row)))))
+				
+	(context "taken-row-present?"
+		(it "returns true if a row is taken"
+			(let [empty-board (make-board 9 nil) full-board (make-board 9 "x") full-row-vector [[1 2 3][4 5 6][7 8 9][1 4 7][2 5 8][3 6 9][1 5 9][3 5 7]]]
+				(should= false (taken-row-present? empty-board full-row-vector))
+				(should= true (taken-row-present? full-board full-row-vector)))))
+
 )
 
 (run-specs)
-
-
-
-
