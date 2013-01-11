@@ -20,13 +20,14 @@
 		(let [board (make-board 9 "0")]
 			(should= (get-marker board 8) "0")))
 			
-	(it "returns a board with a changed marker at the index given"
-		(let [board (make-board 9 "0") board2 (set-marker board "x" 5)]
-			(should= (set-marker board "x" 8) ["0" "0" "0" "0" "0" "0" "0" "x" "0"])
-			(should= (set-marker board "x" 3) ["0" "0" "x" "0" "0" "0" "0" "0" "0"])
-			(should= (set-marker board "x" 4) ["0" "0" "0" "x" "0" "0" "0" "0" "0"])
-			(should= (set-marker board "x" 1) ["x" "0" "0" "0" "0" "0" "0" "0" "0"])
-			(should= (set-marker board "x" 9) ["0" "0" "0" "0" "0" "0" "0" "0" "x"])))
+	(context "set-marker"
+		(it "returns a board with a changed marker at the index given"
+			(let [board (make-board 9 "0") board2 (set-marker board "x" 5)]
+				(should= (set-marker board "x" 8) ["0" "0" "0" "0" "0" "0" "0" "x" "0"])
+				(should= (set-marker board "x" 3) ["0" "0" "x" "0" "0" "0" "0" "0" "0"])
+				(should= (set-marker board "x" 4) ["0" "0" "0" "x" "0" "0" "0" "0" "0"])
+				(should= (set-marker board "x" 1) ["x" "0" "0" "0" "0" "0" "0" "0" "0"])
+				(should= (set-marker board "x" 9) ["0" "0" "0" "0" "0" "0" "0" "0" "x"]))))
 	
 	(context "get-rows"
 		(it "returns the board's 'horizontal' rows" 
@@ -81,6 +82,15 @@
 		(it "returns a vector of row vectors"
 			(let [board (make-board 9 nil) full-row-vector [[1 2 3][4 5 6][7 8 9][1 4 7][2 5 8][3 6 9][1 5 9][3 5 7]]]
 				(should= full-row-vector (generate-rows)))))
+
+	(context "printable-board"
+		(it "returns a nicely formatted board!"
+			(let [board (make-board 9 "x")]
+				(should= "_______\n|x|x|x|\n|x|x|x|\n|x|x|x|\n_______" (printable-board board)))))
+
+	(context "printable-row"
+		(it "returns a nicely formatted row!"
+			(let [row '(x x x)] (should= "|x|x|x|\n" (printable-row row)))))
 
 )
 

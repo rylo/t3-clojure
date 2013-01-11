@@ -1,6 +1,17 @@
 (ns tictactoe.board)
 
-(defn board-size [board] (count board))
+(defn board-size [board] 
+	(count board))
+
+(defn printable-row [row] 
+	(format "|%s|\n" (clojure.string/join "|" row)))
+
+(defn printable-board [board]
+	(loop [rows (partition 3 board) full-string ""]
+		(if (not= 0 (count rows))
+			(let [row (first rows) updated-full-string (str full-string (printable-row row))]
+				(recur (rest rows) updated-full-string))
+				(format "_______\n%s_______" full-string))))
 
 (defn generate-rows [] [[1 2 3][4 5 6][7 8 9][1 4 7][2 5 8][3 6 9][1 5 9][3 5 7]])
 
