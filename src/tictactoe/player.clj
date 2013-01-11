@@ -1,8 +1,16 @@
-(ns tictactoe.player)
+(ns tictactoe.player
+	(:require [tictactoe.io :refer :all]
+			  [tictactoe.game_rules :refer :all]))
 
-(defprotocol CanPlay
-	(marker [this]))
+(defprotocol Player
+	(marker [this])
+	(get-move [this board]))
 
-(defrecord Player [marker]
-	CanPlay
-	(marker [this] (:marker this)))
+(defrecord Human [marker]
+	Player
+	(marker [this] (:marker this))
+	(get-move [this board]
+		(Integer. (loop [] (let [prompt (prompt "Please make a move:") valid (valid-move? board prompt)]
+				(if valid
+					prompt
+					(recur)))))))
