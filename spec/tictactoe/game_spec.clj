@@ -1,34 +1,28 @@
 (ns tictactoe.game-spec
   (:require [speclj.core :refer :all]
             [tictactoe.game :refer :all]
+			[tictactoe.player :refer :all]
 			[tictactoe.board :refer :all]))
-
+			
 (describe "Game"
-	(context "game-over?"
-		(let [full-board (make-board 9 "x") empty-board (make-board 9 nil) row-vector (generate-rows)]
-			(it "should return false if the game isn't over" (should= false (game-over? taken-row-present? empty-board row-vector)))
-			(it "should return false if the game isn't over" (should= true (game-over? taken-row-present? full-board row-vector)))))
-
-	(context "valid-move?"
-		(let [board (make-board 9 nil)]
-			(it "should return false on invalid moves" (should= false (valid-move? board "asdf")))
-			(it "should return false on invalid moves" (should= false (valid-move? board "12222")))
-			(it "should return true on valid moves" (should= true (valid-move? board "1")))))
-	
-	(context "get-human-move"
-		(it "should return the user's move if it is valid"
-			(let [board (make-board 9 nil)]
-				(should= "1" (with-redefs [read-line (constantly "1") println (constantly "")] (get-human-move board)))))
-		(it "should prompt the user for another move if it is invalid" (pending "ability to test recursive input")))
-	
-	
+	(def test-player-list [(tictactoe.player.Human. "x") (tictactoe.player.Human. "o")])
 	
 	; (context "start"
-	; 	(let [board (make-board 9 nil)]
-	; 		(it "should begin a game loop" (should= true (start (make-board 9 nil))))))
-	;
-	; how do i (or why would i) test if a loop started?
-	;
-)
+	; 	(let [board [nil "x" "x" nil nil nil nil nil nil nil]
+	; 		  player-list test-player-list]
+	; 		(it "should end a game loop and return a string if the game is over" 
+	; 			(should= "game over" (with-in-str "1" (start board player-list))))))
+	
+	; (context "set-up-new-game"
+	; 	(let [board [nil "x" "x" nil nil nil nil nil nil nil]
+	; 		  player-list test-player-list]
+	; 		(it "should set up and start a new game" 
+	; 			(should= "lol" (set-up-new-game)))))
+				
+	(context "alternate-players"
+		(let [board (make-board 9 nil) 
+			  player-list test-player-list]
+			(it "should return the other player instance"
+				(should= (nth player-list 0) (alternate-players player-list "x"))))))
 
 (run-specs)
