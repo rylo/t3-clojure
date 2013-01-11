@@ -1,13 +1,13 @@
 # tictactoe
 
-A Clojure library designed to be tic-tac-toe!
+Tic-tac-toe in Clojure!
 
 ## Usage
 
-FIXME
+Install Leiningen, move to the project's top directory and enter <code>lein run</code>.
 
 ## License
 
-Copyright © 2013 FIXME
+Copyright © 2013 Rylan Dirksen
 
 Distributed under the Eclipse Public License, the same as Clojure.
