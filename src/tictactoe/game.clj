@@ -1,16 +1,20 @@
 (ns tictactoe.game
-	(:require [tictactoe.board :refer [get-marker]]
-			  [tictactoe.io :refer [prompt]]))
+	(:require [tictactoe.player :refer :all]
+			  [tictactoe.board :refer [printable-board make-board get-marker taken-row-present? generate-rows set-marker]]
+			  [tictactoe.io :refer [prompt set-output]]
+			  [tictactoe.game_rules :refer [game-over? valid-move?]]))
+			
+(defn alternate-players [player-list current-player] (if (= "x" current-player) (nth player-list 0) (nth player-list 1)))
 
-(defn game-over? [function board row-vector]
-	(function board row-vector))
+(defn start [board player-list]
+	(set-output (printable-board board))
+	(loop [current-player (first player-list) board board]	
+		(let [altered-board (set-marker board (:marker current-player) (get-move current-player board))]
+			(if (game-over? altered-board)
+				"game over"
+				(recur (alternate-players player-list current-player) altered-board)))))
 
-(defn valid-move? [board move-destination]
-	(nil? (try (get-marker board (Integer. move-destination)) (catch Exception e false) (finally true))))
-
-(defn get-human-move [board]
-	(loop []
-		(let [prompt (prompt "Please make a move:") valid (valid-move? board prompt)]
-		(if (true? valid)
-			prompt
-			(recur)))))
+(defn set-up-new-game []
+	(let [board (make-board 9 nil) player-list [(tictactoe.player.Human. "x") (tictactoe.player.Human. "o")]]
+		(set-output "Welcome to Tic Tac Toe!")
+		(start board player-list)))
