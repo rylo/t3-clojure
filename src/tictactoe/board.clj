@@ -33,11 +33,18 @@
 
 (defn row-taken? [board row]
 	(let [row-markers (get-markers board row) first-marker (first row-markers)]
-		(= (count (take-while (and #(= first-marker %) #(not= nil %)) row-markers)) (count row))))
+		(if (not= nil first-marker)
+			(= (count (take-while #(= first-marker %) row-markers)) (count row))
+			false)))
 		
 (defn winning-row-present? [board row-vector]
 	(let [number-of-rows (count row-vector)]
-		(= (count (take-while #(= true (row-taken? board %)) row-vector)) number-of-rows)))
+		(loop [row (first row-vector)]
+			(if (= row '())
+				false 
+				(if (row-taken? board row)
+					true
+					(recur (rest row)))))))
 
 (defn row-taken-by? [marker board row]
 	(= (count (filter #(= marker %) (flatten row))) 3))

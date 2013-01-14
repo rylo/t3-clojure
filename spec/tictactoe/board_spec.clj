@@ -55,11 +55,11 @@
 
 	(context "row-taken?"
 		(it "returns false if the row doesn't contain 3 of the same string" 
-			(let [board (make-board 9 nil) row [1 2 3]]
+			(let [board (make-board 9 nil) row [0 1 2]]
 				(should= false (row-taken? board row))))
 				
 		(it "returns true if the row contains 3 of the same string" 
-			(let [board (make-board 9 "x") row [1 2 3]]
+			(let [board (make-board 9 "x") row [0 1 2]]
 				(should= true (row-taken? board row)))))
 
 	(context "row-taken-by?"
@@ -75,7 +75,8 @@
 		(it "returns true if a row is taken"
 			(let [empty-board (make-board 9 nil) full-board (make-board 9 "x") full-row-vector [[0 1 2][3 4 5][6 7 8][0 3 6][1 4 7][2 5 8][0 4 8][2 4 6]]]
 				(should= false (winning-row-present? empty-board full-row-vector))
-				(should= true (winning-row-present? full-board full-row-vector)))))
+				(should= true (winning-row-present? full-board full-row-vector))
+				(should= true (winning-row-present? ["x" "x" "x" "o" "o" nil nil nil nil] full-row-vector)))))
 				
 	(context "generate-rows"
 		(it "returns a vector of row vectors"
