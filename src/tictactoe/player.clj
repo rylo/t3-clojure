@@ -10,7 +10,8 @@
 	Player
 	(marker [this] (:marker this))
 	(get-move [this board]
-		(Integer. (loop [] (let [prompt (prompt "Please make a move:") valid (valid-move? board prompt)]
-				(if valid
-					prompt
-					(recur)))))))
+		(loop [prompt-return-value (prompt "Please make a move:")] 
+			(let [valid (valid-move? board prompt-return-value)]
+					(if valid
+						(println valid)
+						(recur (prompt "Invalid move, please try again.")))))))
