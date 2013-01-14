@@ -13,17 +13,19 @@
 				(recur (rest rows) updated-full-string))
 				(format "_______\n%s_______" full-string))))
 
-(defn generate-rows [] [[1 2 3][4 5 6][7 8 9][1 4 7][2 5 8][3 6 9][1 5 9][3 5 7]])
+(defn generate-rows [] [[0 1 2][3 4 5][6 7 8][0 3 6][1 4 7][2 5 8][0 4 8][2 4 6]])
 
-(defn make-board [size blank] (take size (repeat blank)))
+(defn make-board [size blank] 
+	(take size (repeat blank)))
 
-(defn get-marker [board index] (nth board index))
+(defn get-marker [board index]
+	(nth board index))
 
 (defn get-markers [board index-vector]
-	(for [index index-vector] (get-marker board (- index 1))))
+	(for [index index-vector] (get-marker board index)))
 
 (defn set-marker [board marker index] 
-	(concat (rest (take index board)) (conj (nthrest board index) marker)))
+	(assoc (into [] board) index marker))
 
 (defn get-rows [board row-guides]
 	(let [board (into [] board)]
@@ -33,9 +35,11 @@
 	(let [row-markers (get-markers board row) first-marker (first row-markers)]
 		(= (count (take-while (and #(= first-marker %) #(not= nil %)) row-markers)) (count row))))
 		
-(defn taken-row-present? [board row-vector]
+(defn winning-row-present? [board row-vector]
 	(let [number-of-rows (count row-vector)]
 		(= (count (take-while #(= true (row-taken? board %)) row-vector)) number-of-rows)))
 
 (defn row-taken-by? [marker board row]
 	(= (count (filter #(= marker %) (flatten row))) 3))
+	
+(defn full? [board] (= (board-size board) (count (filter #(not (nil? %)) board))))
