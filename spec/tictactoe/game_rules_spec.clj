@@ -21,9 +21,20 @@
 			(it "should return true if the board is full and nobody has won"
 				(should= true (game-over-with-tie? tied-board)))
 			(it "should return true if the board is full and somebody has won"
-				(should= true (winning-row-present? not-tied-board (generate-rows)))
+				(should= true (winning-row-present? not-tied-board))
 				(should= true (full? not-tied-board))
-				(should= false (game-over-with-tie? not-tied-board)))
+				(should= false (game-over-with-tie? not-tied-board)))))
+	
+	(context "emtpy-spaces"
+		(it "should return a collection of the indexes of all empty spaces"
+			(let [board ["x" "x" "x" "x" "x" "x" "x" "x" nil]] (should= [8] (empty-spaces board)))
+			(let [board ["x" "x" "x" "x" "x" "x" nil nil nil]] (should= [6 7 8] (empty-spaces board)))))
+			
+	(context "get-winner"
+		(it "should return the marker of the winner of the match"
+			(let [board (make-board 9 "x")]
+				(should= "x" (get-winner board))
+			)
 		)
 	)
 )
