@@ -73,10 +73,13 @@
 				
 	(context "winning-row-present?"
 		(it "returns true if a row is taken"
-			(let [empty-board (make-board 9 nil) full-board (make-board 9 "x") full-row-vector [[0 1 2][3 4 5][6 7 8][0 3 6][1 4 7][2 5 8][0 4 8][2 4 6]]]
-				(should= false (winning-row-present? empty-board full-row-vector))
-				(should= true (winning-row-present? full-board full-row-vector))
-				(should= true (winning-row-present? ["x" "x" "x" "o" "o" nil nil nil nil] full-row-vector)))))
+			(let [empty-board (make-board 9 nil) full-board (make-board 9 "x") full-row-vector (generate-rows)]
+				(should= false (winning-row-present? empty-board))
+				(should= true (winning-row-present? full-board))
+				(should= true (winning-row-present? ["x" "x" "x" "o" "o" nil nil nil nil]))
+				(should= true (winning-row-present? [nil "x" "x" "o" "o" "o" nil nil nil]))
+				(should= false (winning-row-present? ["x" "o" "o" "o" "o" nil nil nil nil]))
+				)))
 				
 	(context "generate-rows"
 		(it "returns a vector of row vectors"
