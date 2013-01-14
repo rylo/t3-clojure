@@ -17,8 +17,8 @@
 	; 	(let [board [nil "x" "x" nil nil nil nil nil nil nil]
 	; 		  player-list test-player-list]
 	; 		(it "should set up and start a new game" 
-	; 			(should= "lol" (set-up-new-game)))))
-				
+	; 			(should= "some way to test a recursive function" (set-up-new-game)))))
+	
 	(context "alternate-players"
 		(let [board (make-board 9 nil) 
 			  player-list test-player-list]
