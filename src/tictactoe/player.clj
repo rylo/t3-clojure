@@ -10,11 +10,11 @@
 	Player
 	(marker [this] (:marker this))
 	(get-move [this board]
-		(loop [prompt-return-value (prompt "Please make a move:")] 
-			(let [valid (valid-move? board prompt-return-value)]
+		(loop [prompt-message "Please make a move:"]
+			(let [prompt-return-value (prompt prompt-message) valid (valid-move? board prompt-return-value)]
 					(if valid
-						(println valid)
-						(recur (prompt "Invalid move, please try again.")))))))
+						(Integer. prompt-return-value)
+						(recur "Invalid move, please try again."))))))
 						
 (defrecord EasyComputer [marker]
 	Player
