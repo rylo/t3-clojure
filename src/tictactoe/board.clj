@@ -21,8 +21,8 @@
 (defn get-marker [board index]
 	(nth board index))
 
-(defn get-markers [board index-vector]
-	(for [index index-vector] (get-marker board index)))
+(defn get-markers [board row-index-vector]
+	(for [index row-index-vector] (get-marker board index)))
 
 (defn set-marker [board marker index] 
 	(assoc (into [] board) index marker))
