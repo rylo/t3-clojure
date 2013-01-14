@@ -15,3 +15,9 @@
 					(if valid
 						(println valid)
 						(recur (prompt "Invalid move, please try again.")))))))
+						
+(defrecord EasyComputer [marker]
+	Player
+	(marker [this] (:marker this))
+	(get-move [this board]
+		(rand-nth (empty-spaces board))))
