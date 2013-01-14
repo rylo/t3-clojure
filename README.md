@@ -4,7 +4,7 @@ Tic-tac-toe in Clojure!
 
 ## Usage
 
-Install Leiningen, move to the project's top directory and enter <code>lein run</code>.
+Install Leiningen, move to the project's top directory and enter <code>lein trampoline run</code>.
 
 ## License
 
