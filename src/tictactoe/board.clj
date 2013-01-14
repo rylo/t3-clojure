@@ -37,14 +37,12 @@
 			(= (count (take-while #(= first-marker %) row-markers)) (count row))
 			false)))
 		
-(defn winning-row-present? [board row-vector]
-	(let [number-of-rows (count row-vector)]
-		(loop [row (first row-vector)]
-			(if (= row '())
-				false 
-				(if (row-taken? board row)
-					true
-					(recur (rest row)))))))
+(defn winning-row-present? [board]
+	(< 0 (count (for [row (generate-rows)
+		  :let [row-markers (get-markers board row)]
+		  :when (row-taken? board row)
+		]
+		row-markers))))
 
 (defn row-taken-by? [marker board row]
 	(= (count (filter #(= marker %) (flatten row))) 3))
