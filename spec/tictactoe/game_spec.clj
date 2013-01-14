@@ -6,6 +6,9 @@
 			
 (describe "Game"
 	(def test-player-list [(tictactoe.player.Human. "x") (tictactoe.player.Human. "o")])
+	(def player-1 (nth test-player-list 0))
+	(def player-2 (nth test-player-list 1))
+	
 	
 	; (context "start"
 	; 	(let [board [nil "x" "x" nil nil nil nil nil nil nil]
@@ -23,6 +26,7 @@
 		(let [board (make-board 9 nil) 
 			  player-list test-player-list]
 			(it "should return the other player instance"
-				(should= (nth player-list 0) (alternate-players player-list "x"))))))
+				(should= player-1 (alternate-players player-list player-2))
+				(should= player-2 (alternate-players player-list player-1))))))
 
 (run-specs)
