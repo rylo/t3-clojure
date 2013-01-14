@@ -18,6 +18,6 @@
 				(recur (alternate-players player-list current-player) altered-board)))))
 
 (defn set-up-new-game []
-	(let [board (make-board 9 nil) player-list [(tictactoe.player.Human. "x") (tictactoe.player.Human. "o")]]
+	(let [board (make-board 9 nil) player-list [(tictactoe.player.Human. "x") (tictactoe.player.EasyComputer. "o")]]
 		(set-output "Welcome to Tic Tac Toe!")
 		(start board player-list)))
