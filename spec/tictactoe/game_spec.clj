@@ -28,5 +28,12 @@
 			(it "should return the other player instance"
 				(should= player-1 (alternate-players player-list player-2))
 				(should= player-2 (alternate-players player-list player-1))))))
+	
+	(context "get-ending-message"
+		(it "should return the appropriate end-of-game message"
+			(let [board (make-board 9 "x")] (should= "Player x wins!" (get-ending-message board)))
+			(let [board ["x" "o" "x" "o" "x" "o" "o" "x" "o"]] (should= "It's a tie!" (get-ending-message board)))
+		)
+	)
 
 (run-specs)
