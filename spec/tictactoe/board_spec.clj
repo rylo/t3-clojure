@@ -78,8 +78,7 @@
 				(should= true (winning-row-present? full-board))
 				(should= true (winning-row-present? ["x" "x" "x" "o" "o" nil nil nil nil]))
 				(should= true (winning-row-present? [nil "x" "x" "o" "o" "o" nil nil nil]))
-				(should= false (winning-row-present? ["x" "o" "o" "o" "o" nil nil nil nil]))
-				)))
+				(should= false (winning-row-present? ["x" "o" "o" "o" "o" nil nil nil nil])))))
 				
 	(context "generate-rows"
 		(it "returns a vector of row vectors"
@@ -103,6 +102,13 @@
 		(it "should return false if the board has less than 9 moves on it"
 			(let [board (make-board 9 nil)]
 				(should= false (full? board)))))
+				
+	(context "replace-nil"
+		(it "should replace a nil value with a space"
+			(should= " " (replace-nil nil))
+			(should= 1 (replace-nil 1))
+		)
+	)
 
 )
 

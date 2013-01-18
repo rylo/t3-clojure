@@ -3,7 +3,7 @@
 (defn board-size [board] 
 	(count board))
 
-(defn printable-row [row] 
+(defn printable-row [row]
 	(format "|%s|\n" (clojure.string/join "|" row)))
 
 (defn printable-board [board]
@@ -11,7 +11,7 @@
 		(if (not= 0 (count rows))
 			(let [row (first rows) updated-full-string (str full-string (printable-row row))]
 				(recur (rest rows) updated-full-string))
-				(format "_______\n%s_______" full-string))))
+			(format "_______\n%s_______" full-string))))
 
 (defn generate-rows [] [[0 1 2][3 4 5][6 7 8][0 3 6][1 4 7][2 5 8][0 4 8][2 4 6]])
 
@@ -36,6 +36,9 @@
 		(if (not= nil first-marker)
 			(= (count (take-while #(= first-marker %) row-markers)) (count row))
 			false)))
+
+(defn row-taken-by? [marker board row]
+	(= (count (filter #(= marker %) (flatten row))) 3))
 		
 (defn winning-row-present? [board]
 	(< 0 (count (for [row (generate-rows)
@@ -43,8 +46,8 @@
 		  :when (row-taken? board row)
 		]
 		row-markers))))
-
-(defn row-taken-by? [marker board row]
-	(= (count (filter #(= marker %) (flatten row))) 3))
 	
 (defn full? [board] (= (board-size board) (count (filter #(not (nil? %)) board))))
+
+(defn replace-nil [value] 
+	(if (nil? value) " " value))
