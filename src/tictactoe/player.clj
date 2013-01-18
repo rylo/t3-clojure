@@ -1,6 +1,6 @@
 (ns tictactoe.player
-	(:require [tictactoe.io :refer :all]
-			  [tictactoe.game_rules :refer :all]))
+	(:require [tictactoe.io :refer [prompt]]
+			  [tictactoe.game_rules :refer [empty-spaces valid-move?]]))
 
 (defprotocol Player
 	(marker [this])
