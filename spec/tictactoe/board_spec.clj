@@ -87,8 +87,8 @@
 
 	(context "printable-board"
 		(it "returns a nicely formatted board!"
-			(let [board (make-board 9 "x")]
-				(should= "_______\n|x|x|x|\n|x|x|x|\n|x|x|x|\n_______" (printable-board board)))))
+			(let [board (make-board 9 "x")] (should= "_______\n|x|x|x|\n|x|x|x|\n|x|x|x|\n_______" (printable-board board)))
+			(let [board (make-board 9 nil)] (should= "_______\n| | | |\n| | | |\n| | | |\n_______" (printable-board board)))))
 
 	(context "printable-row"
 		(it "returns a nicely formatted row!"
@@ -104,12 +104,10 @@
 				(should= false (full? board)))))
 				
 	(context "replace-nil"
-		(it "should replace a nil value with a space"
-			(should= " " (replace-nil nil))
-			(should= 1 (replace-nil 1))
-		)
-	)
-
+		(it "should replace a specified value with a space"
+			(should= '(" ") (replace-nil [nil] " "))
+			(should= '(1 " ") (replace-nil [1 nil] " "))))
+			
 )
 
 (run-specs)

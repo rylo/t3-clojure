@@ -2,9 +2,13 @@
 
 (defn board-size [board] 
 	(count board))
+	
+(defn replace-nil [collection replacement-value]
+	(for [item collection] 
+		(if (nil? item) replacement-value item)))
 
 (defn printable-row [row]
-	(format "|%s|\n" (clojure.string/join "|" row)))
+	(format "|%s|\n" (clojure.string/join "|" (replace-nil row " "))))
 
 (defn printable-board [board]
 	(loop [rows (partition 3 board) full-string ""]
@@ -48,6 +52,3 @@
 		row-markers))))
 	
 (defn full? [board] (= (board-size board) (count (filter #(not (nil? %)) board))))
-
-(defn replace-nil [value] 
-	(if (nil? value) " " value))
