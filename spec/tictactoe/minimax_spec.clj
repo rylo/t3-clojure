@@ -5,6 +5,7 @@
 (context "UltimateComputer minimax"
 	(context "get-best-moves"
 		(it "should return an array of best moves"
+			(pending "finishing minimax algorithm")
 			(let [board ["x" "x" "x" "x" "x" "x" "x" "x" nil]] (should= [8] (get-best-moves "x" board)))
 			(let [board ["x" "x" "x" "x" "x" "x" "x" nil nil]] (should= [7 8] (get-best-moves "x" board)))
 			(let [board ["x" "x" nil nil nil nil nil nil nil]] (should= [2] (get-best-moves "x" board)))
