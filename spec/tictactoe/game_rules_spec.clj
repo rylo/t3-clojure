@@ -4,10 +4,10 @@
             [tictactoe.game_rules :refer :all]))
 
 (describe "game_rules"
-	(context "game-over?"
+	(context "game-won?"
 		(let [full-board (make-board 9 "x") empty-board (make-board 9 nil) row-vector (generate-rows)]
-			(it "should return false if the game isn't over" (should= false (game-over? empty-board)))
-			(it "should return false if the game isn't over" (should= true (game-over? full-board)))))
+			(it "should return false if the game isn't over" (should= false (game-won? empty-board)))
+			(it "should return true if the game isn't over" (should= true (game-won? full-board)))))
 
 	(context "valid-move?"
 		(let [board (make-board 9 nil)]
@@ -33,10 +33,6 @@
 	(context "get-winner"
 		(it "should return the marker of the winner of the match"
 			(let [board (make-board 9 "x")]
-				(should= "x" (get-winner board))
-			)
-		)
-	)
-)
+				(should= "x" (get-winner board))))))
 
 (run-specs)

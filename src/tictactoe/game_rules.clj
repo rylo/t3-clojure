@@ -1,7 +1,7 @@
 (ns tictactoe.game_rules
 	(:require [tictactoe.board :refer [get-marker get-markers row-taken? winning-row-present? generate-rows set-marker full?]]))
 	
-(defn game-over? [board]
+(defn game-won? [board]
 	(winning-row-present? board))
 
 (defn valid-move? [board move-destination]
@@ -15,7 +15,6 @@
 	
 (defn get-winner [board] 
 	(first (for [row (generate-rows)
-		  :let [row-markers (get-markers board row)]
-		  :when (row-taken? board row)
-		]
+		:let [row-markers (get-markers board row)]
+		:when (row-taken? board row)]
 		(first row-markers))))
