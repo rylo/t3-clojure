@@ -25,7 +25,7 @@
 				(should= true (full? not-tied-board))
 				(should= false (game-over-with-tie? not-tied-board)))))
 	
-	(context "emtpy-spaces"
+	(context "empty-spaces"
 		(it "should return a collection of the indexes of all empty spaces"
 			(let [board ["x" "x" "x" "x" "x" "x" "x" "x" nil]] (should= [8] (empty-spaces board)))
 			(let [board ["x" "x" "x" "x" "x" "x" nil nil nil]] (should= [6 7 8] (empty-spaces board)))))
