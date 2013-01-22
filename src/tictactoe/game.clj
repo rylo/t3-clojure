@@ -1,6 +1,6 @@
 (ns tictactoe.game
 	(:require [tictactoe.player :refer :all]
-			  [tictactoe.board :refer [printable-board make-board get-marker generate-rows set-marker]]
+			  [tictactoe.board :refer [printable-board make-board get-marker generate-winning-combinations set-marker]]
 			  [tictactoe.io :refer [prompt print-output]]
 			  [tictactoe.game_rules :refer [get-winner game-won? game-over-with-tie? valid-move?]]))
 			

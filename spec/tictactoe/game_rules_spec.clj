@@ -5,7 +5,7 @@
 
 (describe "game_rules"
 	(context "game-won?"
-		(let [full-board (make-board 9 "x") empty-board (make-board 9 nil) row-vector (generate-rows)]
+		(let [full-board (make-board 9 "x") empty-board (make-board 9 nil) row-vector (generate-winning-combinations)]
 			(it "should return false if the game isn't over" (should= false (game-won? empty-board)))
 			(it "should return true if the game isn't over" (should= true (game-won? full-board)))))
 
@@ -37,7 +37,7 @@
 	
 	(context "winning-row-present?"
 		(it "returns true if a row is taken"
-			(let [empty-board (make-board 9 nil) full-board (make-board 9 "x") full-row-vector (generate-rows)]
+			(let [empty-board (make-board 9 nil) full-board (make-board 9 "x") full-row-vector (generate-winning-combinations)]
 				(should= false (winning-row-present? empty-board))
 				(should= true (winning-row-present? full-board))
 				(should= true (winning-row-present? ["x" "x" "x" "o" "o" nil nil nil nil]))

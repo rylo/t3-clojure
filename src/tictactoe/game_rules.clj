@@ -1,8 +1,8 @@
 (ns tictactoe.game_rules
-	(:require [tictactoe.board :refer [get-marker get-markers row-taken? generate-rows set-marker full?]]))
+	(:require [tictactoe.board :refer [get-marker get-markers row-taken? generate-winning-combinations set-marker full?]]))
 
 (defn winning-row-present? [board]
-	(< 0 (count (for [row (generate-rows)
+	(< 0 (count (for [row (generate-winning-combinations)
 		  :let [row-markers (get-markers board row)]
 		  :when (row-taken? board row)
 		]
@@ -21,7 +21,7 @@
 	(map first (filter #(= nil (second %)) (map-indexed vector board))))
 	
 (defn get-winner [board] 
-	(first (for [row (generate-rows)
+	(first (for [row (generate-winning-combinations)
 		:let [row-markers (get-markers board row)]
 		:when (row-taken? board row)]
 		(first row-markers))))

@@ -17,7 +17,7 @@
 				(recur (rest rows) updated-full-string))
 			(format "_______\n%s_______" full-string))))
 
-(defn generate-rows [] [[0 1 2][3 4 5][6 7 8][0 3 6][1 4 7][2 5 8][0 4 8][2 4 6]])
+(defn generate-winning-combinations [] [[0 1 2][3 4 5][6 7 8][0 3 6][1 4 7][2 5 8][0 4 8][2 4 6]])
 
 (defn make-board [size blank] 
 	(take size (repeat blank)))

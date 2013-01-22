@@ -9,7 +9,6 @@
 	(def player-1 (nth test-player-list 0))
 	(def player-2 (nth test-player-list 1))
 	
-	
 	; (context "start"
 	; 	(let [board [nil "x" "x" nil nil nil nil nil nil nil]
 	; 		  player-list test-player-list]
@@ -32,8 +31,6 @@
 	(context "get-ending-message"
 		(it "should return the appropriate end-of-game message"
 			(let [board (make-board 9 "x")] (should= "Player x wins!" (get-ending-message board)))
-			(let [board ["x" "o" "x" "o" "x" "o" "o" "x" "o"]] (should= "It's a tie!" (get-ending-message board)))
-		)
-	)
+			(let [board ["x" "o" "x" "o" "x" "o" "o" "x" "o"]] (should= "It's a tie!" (get-ending-message board)))))
 
 (run-specs)

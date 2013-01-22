@@ -1,5 +1,5 @@
 (ns tictactoe.minimax
-	(:require [tictactoe.board :refer [get-marker get-markers row-taken? generate-rows set-marker full?]]
+	(:require [tictactoe.board :refer [get-marker get-markers row-taken? generate-winning-combinations set-marker full?]]
 			  [tictactoe.game_rules :refer :all]
 			  [tictactoe.game :refer :all]))
 
