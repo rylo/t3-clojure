@@ -7,9 +7,9 @@
 		(it "should receive user input" 
 			(should= "o hi dere" (with-in-str "o hi dere" (get-input)))))
 		
-	(context "set-output"
+	(context "print-output"
 		(it "should print an output" (with-redefs [println (constantly "output")] 
-			(should= "output" (set-output "o hi dere")))))
+			(should= "output" (print-output "o hi dere")))))
 		
 	(context "prompt"
 		(let [question "Who did you see at Burger King?" celebrity-name "Beyonce"]

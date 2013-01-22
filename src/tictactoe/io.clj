@@ -2,6 +2,6 @@
 
 (defn get-input [] (read-line))
 
-(defn set-output [output-str] (println output-str))
+(defn print-output [output-str] (println output-str))
 
-(defn prompt [question] (set-output question) (get-input))
+(defn prompt [question] (print-output question) (get-input))
