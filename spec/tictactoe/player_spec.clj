@@ -27,20 +27,10 @@
 			(it "should return a move in an empty space"
 				(let [board ["x" "x" "x" "x" "x" "x" "x" "x" nil]] (should= 8 (get-move easy-computer-player board))))))
 
-	(context "Ulimate Computer Player (minimax algorithm)"
-		(context "get-score"
-			(it "should return a number score based on the state of the board"
-				(let [board ["x" "x" "x" "x" "x" "x" "x" "x" "x"]] (should= 100 (get-score "x" board)))
-				(let [board ["x" "x" "x" "x" "x" "x" "x" "x" "x"]] (should= -100 (get-score "o" board)))
-				(let [board ["o" "o" "o" "o" "o" "o" "o" "o" "o"]] (should= -100 (get-score "x" board)))
-				(let [board ["x" nil nil nil "o" nil nil nil "o"]] (should= 0 (get-score "o" board)))
-				(let [board ["x" "x" "x" nil "o" nil nil nil "o"]] (should= -100 (get-score "o" board)))))
-		
+	(context "Ulimate Computer Player (minimax algorithm)"		
 		(context "get-move"
 			(it "should return a move in an empty space"
 				(let [board ["x" "x" "x" "x" "x" "x" "x" "x" nil]] (should= 8 (get-move ultimate-computer-player board)))
-				(let [board ["o" "o" "x" "x" "o" "x" nil nil "o"]] (should (contains-value? (get-move ultimate-computer-player board) [6 7])))))
-	)
-)
+				(let [board ["o" "o" "x" "x" "o" "x" nil nil "o"]] (should (contains-value? (get-move ultimate-computer-player board) [6 7])))))))
 
 (run-specs)
