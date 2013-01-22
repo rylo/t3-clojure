@@ -76,15 +76,6 @@
 			(let [board (make-board 9 nil) 
 				  full-row-vector [[0 1 2][3 4 5][6 7 8][0 3 6][1 4 7][2 5 8][0 4 8][2 4 6]]]
 				(should= full-row-vector (generate-winning-combinations)))))
-
-	(context "printable-board"
-		(it "returns a nicely formatted board!"
-			(let [board (make-board 9 "x")] (should= "_______\n|x|x|x|\n|x|x|x|\n|x|x|x|\n_______" (printable-board board)))
-			(let [board (make-board 9 nil)] (should= "_______\n| | | |\n| | | |\n| | | |\n_______" (printable-board board)))))
-
-	(context "printable-row"
-		(it "returns a nicely formatted row!"
-			(let [row '(x x x)] (should= "|x|x|x|\n" (printable-row row)))))
 			
 	(context "full?"
 		(it "should return true if the board has 9 moves on it"
@@ -93,13 +84,6 @@
 				
 		(it "should return false if the board has less than 9 moves on it"
 			(let [board (make-board 9 nil)]
-				(should= false (full? board)))))
-				
-	(context "replace-nil"
-		(it "should replace a specified value with a space"
-			(should= '(" ") (replace-nil [nil] " "))
-			(should= '(1 " ") (replace-nil [1 nil] " "))))
-			
-)
+				(should= false (full? board))))))
 
 (run-specs)
