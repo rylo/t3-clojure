@@ -1,6 +1,13 @@
 (ns tictactoe.game_rules
-	(:require [tictactoe.board :refer [get-marker get-markers row-taken? winning-row-present? generate-rows set-marker full?]]))
-	
+	(:require [tictactoe.board :refer [get-marker get-markers row-taken? generate-rows set-marker full?]]))
+
+(defn winning-row-present? [board]
+	(< 0 (count (for [row (generate-rows)
+		  :let [row-markers (get-markers board row)]
+		  :when (row-taken? board row)
+		]
+		row-markers))))
+
 (defn game-won? [board]
 	(winning-row-present? board))
 

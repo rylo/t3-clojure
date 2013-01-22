@@ -43,12 +43,5 @@
 
 (defn row-taken-by? [marker board row]
 	(= (count (filter #(= marker %) (flatten row))) 3))
-		
-(defn winning-row-present? [board]
-	(< 0 (count (for [row (generate-rows)
-		  :let [row-markers (get-markers board row)]
-		  :when (row-taken? board row)
-		]
-		row-markers))))
 	
 (defn full? [board] (= (board-size board) (count (filter #(not (nil? %)) board))))

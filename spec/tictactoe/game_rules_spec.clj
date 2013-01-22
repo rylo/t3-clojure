@@ -34,5 +34,14 @@
 		(it "should return the marker of the winner of the match"
 			(let [board (make-board 9 "x")]
 				(should= "x" (get-winner board))))))
+	
+	(context "winning-row-present?"
+		(it "returns true if a row is taken"
+			(let [empty-board (make-board 9 nil) full-board (make-board 9 "x") full-row-vector (generate-rows)]
+				(should= false (winning-row-present? empty-board))
+				(should= true (winning-row-present? full-board))
+				(should= true (winning-row-present? ["x" "x" "x" "o" "o" nil nil nil nil]))
+				(should= true (winning-row-present? [nil "x" "x" "o" "o" "o" nil nil nil]))
+				(should= false (winning-row-present? ["x" "o" "o" "o" "o" nil nil nil nil])))))
 
 (run-specs)
