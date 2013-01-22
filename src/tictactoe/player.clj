@@ -1,6 +1,6 @@
 (ns tictactoe.player
 	(:require [tictactoe.io :refer [prompt]]
-			  [tictactoe.game_rules :refer [empty-spaces valid-move? get-winner game-over-with-tie? game-over?]]))
+			  [tictactoe.game_rules :refer [empty-spaces valid-move?]]))
 
 (defprotocol Player
 	(marker [this])
@@ -35,10 +35,3 @@
 	Player
 	(marker [this] (:marker this))
 	(get-move [this board]))
-	
-(defn get-score [player-marker board]
-	(if (or (game-over-with-tie? board) (not (game-over? board)))
-		0
-		(if (= player-marker (get-winner board))
-			 100
-			-100)))
