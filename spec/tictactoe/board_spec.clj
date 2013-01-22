@@ -24,15 +24,15 @@
 		(it "returns a board with a changed marker at the index given"
 			(let [board (make-board 9 "0") board2 (set-marker board "x" 5)]
 				(should= ["0" "0" "0" "0" "0" "0" "0" "0" "x"] (set-marker board "x" 8))
-				(should= (set-marker board "x" 3) ["0" "0" "0" "x" "0" "0" "0" "0" "0"])
-				(should= (set-marker board "x" 4) ["0" "0" "0" "0" "x" "0" "0" "0" "0"])
-				(should= (set-marker board "x" 1) ["0" "x" "0" "0" "0" "0" "0" "0" "0"]))))
+				(should= ["0" "0" "0" "x" "0" "0" "0" "0" "0"] (set-marker board "x" 3))
+				(should= ["0" "0" "0" "0" "x" "0" "0" "0" "0"] (set-marker board "x" 4))
+				(should= ["0" "x" "0" "0" "0" "0" "0" "0" "0"] (set-marker board "x" 1)))))
 	
 	(context "get-rows"
 		(it "returns the board's 'horizontal' rows" 
 			(let [board (make-board 9 "0") row-guide [[0 1 2] [3 4 5] [6 7 8]]]
-				(should= (get-rows (set-marker board "x" 2) row-guide) [["0" "0" "x"] ["0" "0" "0"] ["0" "0" "0"]])
-				(should= (get-rows (set-marker board "x" 4) row-guide) [["0" "0" "0"] ["0" "x" "0"] ["0" "0" "0"]])))
+				(should= [["0" "0" "x"] ["0" "0" "0"] ["0" "0" "0"]] (get-rows (set-marker board "x" 2) row-guide))
+				(should= [["0" "0" "0"] ["0" "x" "0"] ["0" "0" "0"]] (get-rows (set-marker board "x" 4) row-guide))))
 	
 		(it "returns a single row from the board" 
 			(let [board (make-board 9 "0") row-guide [[0 1 2]]]
@@ -40,8 +40,8 @@
 	
 		(it "returns the board's 'vertical' rows" 
 			(let [board (make-board 9 "0") row-guide [[0 3 6] [1 4 7] [2 5 8]]]
-				(should= (get-rows (set-marker board "x" 2) row-guide) [["0" "0" "0"] ["0" "0" "0"] ["x" "0" "0"]])
-				(should= (get-rows (set-marker board "x" 3) row-guide) [["0" "x" "0"] ["0" "0" "0"] ["0" "0" "0"]]))))
+				(should= [["0" "0" "0"] ["0" "0" "0"] ["x" "0" "0"]] (get-rows (set-marker board "x" 2) row-guide))
+				(should= [["0" "x" "0"] ["0" "0" "0"] ["0" "0" "0"]] (get-rows (set-marker board "x" 3) row-guide)))))
 	
 	(it "returns the spaces at the locations in a vector"
 		(let [board (set-marker (make-board 9 "0") "x" 1)]
@@ -71,10 +71,11 @@
 			(let [board (make-board 9 "x") row (get-rows board [[1 2 3]])]
 				(should= true (row-taken-by? "x" board row)))))
 				
-	(context "generate-rows"
+	(context "generate-winning-combinations"
 		(it "returns a vector of row vectors"
-			(let [board (make-board 9 nil) full-row-vector [[0 1 2][3 4 5][6 7 8][0 3 6][1 4 7][2 5 8][0 4 8][2 4 6]]]
-				(should= full-row-vector (generate-rows)))))
+			(let [board (make-board 9 nil) 
+				  full-row-vector [[0 1 2][3 4 5][6 7 8][0 3 6][1 4 7][2 5 8][0 4 8][2 4 6]]]
+				(should= full-row-vector (generate-winning-combinations)))))
 
 	(context "printable-board"
 		(it "returns a nicely formatted board!"
