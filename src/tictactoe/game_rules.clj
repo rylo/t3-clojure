@@ -8,9 +8,6 @@
 		]
 		row-markers))))
 
-(defn game-won? [board]
-	(winning-row-present? board))
-
 (defn valid-move? [board move-destination]
 	(nil? (try (get-marker board (Integer. move-destination)) (catch Exception e false) (finally true))))
 	
@@ -25,3 +22,9 @@
 		:let [row-markers (get-markers board row)]
 		:when (row-taken? board row)]
 		(first row-markers))))
+		
+(defn game-over? [board]
+	(or (winning-row-present? board) (game-over-with-tie? board)))
+	
+(defn game-not-over? [board]
+	(not (game-over? board)))
