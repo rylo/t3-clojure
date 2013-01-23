@@ -1,6 +1,7 @@
 (ns tictactoe.player
 	(:require [tictactoe.io :refer [prompt]]
-			  [tictactoe.game_rules :refer [empty-spaces valid-move?]]))
+			  [tictactoe.game_rules :refer [empty-spaces valid-move?]]
+			  [tictactoe.minimax :refer [get-best-move]]))
 
 (defprotocol Player
 	(marker [this])
@@ -19,7 +20,7 @@
 	(rand-nth (empty-spaces board)))
 	
 (defmethod get-move "class tictactoe.player.UltimateComputer" [this board] 
-	(rand-nth (empty-spaces board)))
+	(get-best-move (:marker this) board))
 
 (defrecord Human [marker]
 	Player
