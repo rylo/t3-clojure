@@ -3,18 +3,13 @@
 			[tictactoe.minimax :refer :all]))
 
 (context "UltimateComputer minimax"
-	(context "get-best-moves"
+	(context "score-empty-spots"
 		(it "should return an array of best moves"
-			(pending "finishing minimax algorithm")
-			(let [board ["x" "x" "x" "x" "x" "x" "x" "x" nil]] (should= [8] (get-best-moves "x" board)))
-			(let [board ["x" "x" "x" "x" "x" "x" "x" nil nil]] (should= [7 8] (get-best-moves "x" board)))
-			(let [board ["x" "x" nil nil nil nil nil nil nil]] (should= [2] (get-best-moves "x" board)))
-			(let [board [nil nil nil nil nil nil nil nil nil]] (should= [5] (get-best-moves "x" board)))))
-
-	(context "end-of-tree?"
-		(it "should return false if the game is not over"
-			(let [board ["x" "x" "x" "x" "x" "x" "x" "x" nil]] (should= true (end-of-tree? board)))
-			(let [board [nil nil nil nil nil nil nil nil nil]] (should= false (end-of-tree? board)))))
+			(should= [-100 100 -100 0 100] (score-empty-spots "x" ["x" "o" nil nil nil nil "x" "x" nil]))))
+			
+	(context "get-best-move"
+		(it "should return the value"
+			(should= 8 (get-best-move "x" ["x" "o" nil nil nil nil "x" "x" nil]))))
 
 	(context "get-score"
 		(it "should return a number score based on the state of the board"
@@ -24,4 +19,10 @@
 			(let [board ["x" nil nil nil "o" nil nil nil "o"]] (should= 0 (get-score "o" board)))
 			(let [board ["x" "x" "x" nil "o" nil nil nil "o"]] (should= -100 (get-score "o" board))))))
 			
+	(context "minimax"
+		(it "should return a number score based on the state of the board"
+            (should= 100 (minimax ["x" "x" "x" nil nil nil nil nil nil] "x" 1))
+			(should= -100 (minimax ["o" "o" "o" nil nil nil nil nil nil] "x" 1))
+		    (should= 0 (minimax ["x" "o" "x" "o" "o" "x" nil "x" "o"] "x" 1))))
+				
 (run-specs)
