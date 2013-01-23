@@ -14,8 +14,10 @@
 	(format "|%s|\n" (clojure.string/join "|" (replace-nil row " "))))
 
 (defn printable-board [board]
-	(loop [rows (partition 3 board) full-string ""]
+	(loop [rows (partition 3 board) 
+		   full-string ""]
 		(if (not= 0 (count rows))
-			(let [row (first rows) updated-full-string (str full-string (printable-row row))]
+			(let [row (first rows)
+				  updated-full-string (str full-string (printable-row row))]
 				(recur (rest rows) updated-full-string))
 			(format "_______\n%s_______" full-string))))
