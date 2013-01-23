@@ -4,16 +4,21 @@
             [tictactoe.game_rules :refer :all]))
 
 (describe "game_rules"
-	(context "game-won?"
-		(let [full-board (make-board 9 "x") empty-board (make-board 9 nil) row-vector (generate-winning-combinations)]
-			(it "should return false if the game isn't over" (should= false (game-won? empty-board)))
-			(it "should return true if the game isn't over" (should= true (game-won? full-board)))))
+	(context "game-over?"
+			(it "should return false if the game isn't over" 
+				(should= false (game-over? (make-board 9 nil))))
+			(it "should return false if the game isn't over" 
+				(should= true (game-over? ["x" "o" "x" "o" "x" "o" "o" "x" "o"])))
+			(it "should return true if the game isn't over" 
+				(should= true (game-over? (make-board 9 "x")))))
 
 	(context "valid-move?"
-		(let [board (make-board 9 nil)]
-			(it "should return false on invalid moves" (should= false (valid-move? board "asdf")))
-			(it "should return false on invalid moves" (should= false (valid-move? board "12222")))
-			(it "should return true on valid moves" (should= true (valid-move? board "1")))))
+			(it "should return false on invalid moves" 
+				(should= false (valid-move? (make-board 9 nil) "asdf")))
+			(it "should return false on invalid moves" 
+				(should= false (valid-move? (make-board 9 nil) "12222")))
+			(it "should return true on valid moves" 
+				(should= true (valid-move? (make-board 9 nil) "1"))))
 			
 	(context "game-over-with-tie?"
 		(let [tied-board ["x" "o" "x" "o" "x" "o" "o" "x" "o"]
@@ -21,14 +26,21 @@
 			(it "should return true if the board is full and nobody has won"
 				(should= true (game-over-with-tie? tied-board)))
 			(it "should return true if the board is full and somebody has won"
-				(should= true (winning-row-present? not-tied-board))
-				(should= true (full? not-tied-board))
-				(should= false (game-over-with-tie? not-tied-board)))))
+				(should= true (winning-row-present? ["x" "x" "x" "o" "x" "o" "o" "x" "o"]))
+				(should= true (full? ["x" "x" "x" "o" "x" "o" "o" "x" "o"]))
+				(should= false (game-over-with-tie? ["x" "x" "x" "o" "x" "o" "o" "x" "o"])))))
+				
+	(context "game-not-over?"
+		(it "should return the marker of the winner of the match"
+			(let [board (make-board 9 "x")]
+				(should= false (game-not-over? board)))))
 	
 	(context "empty-spaces"
 		(it "should return a collection of the indexes of all empty spaces"
-			(let [board ["x" "x" "x" "x" "x" "x" "x" "x" nil]] (should= [8] (empty-spaces board)))
-			(let [board ["x" "x" "x" "x" "x" "x" nil nil nil]] (should= [6 7 8] (empty-spaces board)))))
+			(let [board ["x" "x" "x" "x" "x" "x" "x" "x" nil]] 
+				(should= [8] (empty-spaces board)))
+			(let [board ["x" "x" "x" "x" "x" "x" nil nil nil]] 
+				(should= [6 7 8] (empty-spaces board)))))
 			
 	(context "get-winner"
 		(it "should return the marker of the winner of the match"
