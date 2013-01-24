@@ -14,8 +14,10 @@
 (defn get-markers [board row-index-vector]
 	(for [index row-index-vector] (get-marker board index)))
 
-(defn set-marker [board marker index] 
-	(assoc (into [] board) index marker))
+(defn set-marker [board marker index]
+	(if (nil? index)
+		board
+		(assoc (into [] board) index marker)))
 
 (defn get-rows [board row-guides]
 	(let [board (into [] board)]

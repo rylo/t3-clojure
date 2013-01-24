@@ -1,48 +1,44 @@
 (ns tictactoe.minimax
 	(:require [tictactoe.game_rules :refer :all]
-			  [tictactoe.board :refer :all]))
+			  [tictactoe.board :refer :all]
+			  [tictactoe.io :refer :all]))
 
-;write test for this!
 (defn alternate-player-marker [player-marker]
 	(if (= "x" player-marker)
 		"o"
 		"x"))
 
 (defn get-score [player-marker board]
-	(if (or (game-over-with-tie? board) (game-not-over? board))
+	(if (game-over-with-tie? board)
 		0
 		(if (= player-marker (get-winner board))
 			 100
 			-100)))
 
-(defn minimax [board player-marker score]
-	(if (game-over? board)
-		(get-score player-marker board)
-			(loop [other-player-marker (alternate-player-marker player-marker)
-				   empty-spaces (empty-spaces board)
-				   altered-board (set-marker board other-player-marker (first empty-spaces))
-				   current-score (get-score other-player-marker altered-board)]
-				(if (= 0 (count empty-spaces))
-				current-score
-				(do (minimax altered-board other-player-marker current-score) 
-					(recur other-player-marker (rest empty-spaces) altered-board current-score))))))
+(defn minimax [board player-marker depth]
+	(let [space (rand-nth (empty-spaces board))
+	      altered-board (set-marker board player-marker space)]
+		(if (game-over? altered-board)
+			(do (print (printable-board altered-board)) 
+				(println (/ (get-score player-marker altered-board) depth)) 
+				(/ (get-score player-marker altered-board) depth))
+			(* -1 (minimax altered-board (alternate-player-marker player-marker) (inc depth))))))
 
-(defn score-empty-spots [player-marker board]
+(defn score-empty-spaces [player-marker board]
 	(for [empty-space (empty-spaces board)
-		  :let [altered-board (set-marker board player-marker empty-space) 
-				score (get-score player-marker altered-board)]] 
-				(* -1 (minimax altered-board (alternate-player-marker player-marker) score))))
+		  :let [altered-board (set-marker board player-marker empty-space)]]
+			; (do (println empty-space) (print (printable-board altered-board) )
+					(* -1 (minimax altered-board (alternate-player-marker player-marker) 1))))
 		
 (defn get-best-move [player-marker board] 
-	(key (apply max-key val (apply hash-map (interleave (empty-spaces board) (score-empty-spots player-marker board))))))
-
-	; score-empty-spots 
-		; loop through empty spaces
-		   ; make a move on empty space with computer marker
-		   ; delegate to minimax with human player marker to get score for game's end state
+	(interleave (empty-spaces board) (score-empty-spaces player-marker board)))
+	; (key (apply max-key val (apply hash-map (interleave (empty-spaces board) (score-empty-spaces player-marker board))))))
 	
-	; minimax
-		; return current player score if the game is over with current board
-	    ; loop through empty spaces
-	       ; set other player marker on each empty space
-	       ; recur on altered board
+	
+	; (println player-marker)
+	; (print (printable-board board))
+	; (println (get-score player-marker board))
+	
+	
+	; open spaces
+	;  open spaces

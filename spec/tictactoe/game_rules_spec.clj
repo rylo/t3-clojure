@@ -44,8 +44,11 @@
 			
 	(context "get-winner"
 		(it "should return the marker of the winner of the match"
-			(let [board (make-board 9 "x")]
-				(should= "x" (get-winner board))))))
+			(should= "x" (get-winner (make-board 9 "x")))
+			(should= "o" (get-winner (make-board 9 "o")))
+			(should= "x" (get-winner ["x" "x" "x" nil nil "o" nil nil nil]))
+			(should= nil (get-winner (make-board 9 nil)))
+			(should= nil (get-winner [nil "x" nil nil nil "o" nil nil nil]))))
 	
 	(context "winning-row-present?"
 		(it "returns true if a row is taken"
@@ -54,6 +57,6 @@
 				(should= true (winning-row-present? full-board))
 				(should= true (winning-row-present? ["x" "x" "x" "o" "o" nil nil nil nil]))
 				(should= true (winning-row-present? [nil "x" "x" "o" "o" "o" nil nil nil]))
-				(should= false (winning-row-present? ["x" "o" "o" "o" "o" nil nil nil nil])))))
+				(should= false (winning-row-present? ["x" "o" "o" "o" "o" nil nil nil nil]))))))
 
 (run-specs)
