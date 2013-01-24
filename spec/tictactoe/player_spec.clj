@@ -30,7 +30,6 @@
 	(context "Ulimate Computer Player (minimax algorithm)"		
 		(context "get-move"
 			(it "should return a move in an empty space"
-				(let [board ["x" "x" "x" "x" "x" "x" "x" "x" nil]] (should= 8 (get-move ultimate-computer-player board)))
-				(let [board ["o" "o" "x" "x" "o" "x" nil nil "o"]] (should (contains-value? (get-move ultimate-computer-player board) [6 7])))))))
+				(should= 2 (get-move ultimate-computer-player ["x" "x" nil nil nil nil nil nil nil]))))))
 
 (run-specs)
