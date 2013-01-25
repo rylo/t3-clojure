@@ -1,9 +1,9 @@
-(ns tictactoe.minimax-spec
+(ns tictactoe.negamax-spec
   (:require [speclj.core :refer :all]
-			[tictactoe.minimax :refer :all]
+			[tictactoe.negamax :refer :all]
 			[tictactoe.game_rules :refer :all]))
 
-(context "UltimateComputer minimax"
+(context "UltimateComputer negamax"
 	(context "score-empty-spaces"
 		(it "should return an array of best moves"
 			(should= [50 100 50 50 100] (score-empty-spaces "x" ["x" "o" nil nil nil nil "x" "x" nil]))))

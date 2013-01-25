@@ -27,7 +27,7 @@
 			(it "should return a move in an empty space"
 				(let [board ["x" "x" "x" "x" "x" "x" "x" "x" nil]] (should= 8 (get-move easy-computer-player board))))))
 
-	(context "Ulimate Computer Player (minimax algorithm)"		
+	(context "Ulimate Computer Player (negamax algorithm)"		
 		(context "get-move"
 			(it "should return a move in an empty space"
 				(should= 2 (get-move ultimate-computer-player ["x" "x" nil nil nil nil nil nil nil]))))))

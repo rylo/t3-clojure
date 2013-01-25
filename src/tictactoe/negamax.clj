@@ -1,4 +1,4 @@
-(ns tictactoe.minimax
+(ns tictactoe.negamax
 	(:require [tictactoe.game_rules :refer :all]
 			  [tictactoe.board :refer :all]
 			  [tictactoe.io :refer :all]))
@@ -15,17 +15,19 @@
 			 100
 			-100)))
 
-(defn minimax [board player-marker depth]
+(defn negamax [board player-marker depth]
 	(for [empty-space (empty-spaces board)
 		:let[altered-board (set-marker board player-marker empty-space)]]
 			(if (game-over? altered-board)
 				(int (/ (get-score player-marker altered-board) depth))
-				(* -1 (apply max (flatten (minimax altered-board (alternate-player-marker player-marker) (inc depth))))))))
+				(* -1 (apply max (flatten (negamax altered-board (alternate-player-marker player-marker) (inc depth))))))))
 
 (defn score-empty-spaces [player-marker board]
 	(for [empty-space (empty-spaces board)
 		  :let [altered-board (set-marker board player-marker empty-space)]]
-				(* -1 (apply max (flatten (minimax altered-board (alternate-player-marker player-marker) 1))))))
+				(.start (Thread. 
+					(fn []
+					(* -1 (apply max (flatten (negamax altered-board (alternate-player-marker player-marker) 1)))))))))
 		
 (defn get-best-move [player-marker board] 
 	(key (apply max-key val (apply hash-map (interleave (empty-spaces board) (score-empty-spaces player-marker board))))))
