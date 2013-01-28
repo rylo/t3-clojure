@@ -61,15 +61,6 @@
 		(it "returns true if the row contains 3 of the same string" 
 			(let [board (make-board 9 "x") row [0 1 2]]
 				(should= true (row-taken? board row)))))
-
-	(context "row-taken-by?"
-		(it "returns false if the row doesn't contain 3 of the same string" 
-			(let [board (make-board 9 nil) row (get-rows board [[1 2 3]])]
-				(should= false (row-taken-by? "x" board row))))
-
-		(it "returns true if the row contains 3 of the same string" 
-			(let [board (make-board 9 "x") row (get-rows board [[1 2 3]])]
-				(should= true (row-taken-by? "x" board row)))))
 				
 	(context "generate-winning-combinations"
 		(it "returns a vector of row vectors"

@@ -28,3 +28,6 @@
 	
 (defn game-not-over? [board]
 	(not (game-over? board)))
+	
+(defn row-taken-by? [marker board row]
+	(= (count (filter #(= marker %) (flatten row))) 3))

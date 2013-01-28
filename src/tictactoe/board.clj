@@ -28,8 +28,5 @@
 		(if (not= nil first-marker)
 			(= (count (take-while #(= first-marker %) row-markers)) (count row))
 			false)))
-
-(defn row-taken-by? [marker board row]
-	(= (count (filter #(= marker %) (flatten row))) 3))
 	
 (defn full? [board] (= (board-size board) (count (filter #(not (nil? %)) board))))

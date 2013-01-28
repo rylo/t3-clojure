@@ -18,16 +18,14 @@
 (defn negamax [board player-marker depth]
 	(for [empty-space (empty-spaces board)
 		:let[altered-board (set-marker board player-marker empty-space)]]
-			(if (game-over? altered-board)
+			(if (or (game-over? altered-board) (= depth 5))
 				(int (/ (get-score player-marker altered-board) depth))
 				(* -1 (apply max (flatten (negamax altered-board (alternate-player-marker player-marker) (inc depth))))))))
 
 (defn score-empty-spaces [player-marker board]
 	(for [empty-space (empty-spaces board)
 		  :let [altered-board (set-marker board player-marker empty-space)]]
-				(.start (Thread. 
-					(fn []
-					(* -1 (apply max (flatten (negamax altered-board (alternate-player-marker player-marker) 1)))))))))
+				(* -1 (apply max (flatten (negamax altered-board (alternate-player-marker player-marker) 1))))))
 		
 (defn get-best-move [player-marker board] 
 	(key (apply max-key val (apply hash-map (interleave (empty-spaces board) (score-empty-spaces player-marker board))))))

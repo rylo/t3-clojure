@@ -58,5 +58,15 @@
 				(should= true (winning-row-present? ["x" "x" "x" "o" "o" nil nil nil nil]))
 				(should= true (winning-row-present? [nil "x" "x" "o" "o" "o" nil nil nil]))
 				(should= false (winning-row-present? ["x" "o" "o" "o" "o" nil nil nil nil]))))))
+	
+	(context "row-taken-by?"
+		(it "returns false if the row doesn't contain 3 of the same string" 
+			(let [board (make-board 9 nil) row (get-rows board [[1 2 3]])]
+				(should= false (row-taken-by? "x" board row))))
+
+		(it "returns true if the row contains 3 of the same string" 
+			(let [board (make-board 9 "x") row (get-rows board [[1 2 3]])]
+				(should= true (row-taken-by? "x" board row)))))
+	
 
 (run-specs)
