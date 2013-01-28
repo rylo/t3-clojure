@@ -66,13 +66,8 @@
 			(should= false (winning-move-available-in-row? "x" ["x" "x" "x" "o" "o" nil nil nil nil] [0 1 2])))
 		(it "returns false if the row cannot be won by the player with the supplied marker" 
 			(should= false (winning-move-available-in-row? "x" ["x" "o" nil nil nil nil nil nil nil] [0 1 2])))
-			
 		(it "returns false if no rows cannot be won by the player with the supplied marker" 
 			(should= false (winning-move-available? "x" ["x" nil nil nil "o" nil nil nil nil] (generate-winning-combinations)))
-			(should= true (winning-move-available? "x" ["x" "x" nil nil "o" nil nil nil nil] (generate-winning-combinations)))
-		)
-			
-	)
-	
+			(should= true (winning-move-available? "x" ["x" "x" nil nil "o" nil nil nil nil] (generate-winning-combinations)))))
 
 (run-specs)
