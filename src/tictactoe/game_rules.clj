@@ -28,6 +28,15 @@
 	
 (defn game-not-over? [board]
 	(not (game-over? board)))
-	
-(defn row-taken-by? [marker board row]
-	(= (count (filter #(= marker %) (flatten row))) 3))
+
+(defn winning-move-available-in-row?  [player-marker board row]
+	(let [row-markers (get-markers board row)]
+		(and (= (count (filter #(= player-marker %) row-markers)) 2)
+			 (= (count (filter #(= nil %) row-markers)) 1))))
+
+(defn winning-move-available? [player-marker board row-vector] 
+	(< 0 (count 
+		(for [row row-vector
+		:let [outcome (winning-move-available-in-row? player-marker board row)]
+		:when (= true outcome)]
+		row))))

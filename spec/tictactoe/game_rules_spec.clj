@@ -59,14 +59,20 @@
 				(should= true (winning-row-present? [nil "x" "x" "o" "o" "o" nil nil nil]))
 				(should= false (winning-row-present? ["x" "o" "o" "o" "o" nil nil nil nil]))))))
 	
-	(context "row-taken-by?"
-		(it "returns false if the row doesn't contain 3 of the same string" 
-			(let [board (make-board 9 nil) row (get-rows board [[1 2 3]])]
-				(should= false (row-taken-by? "x" board row))))
-
-		(it "returns true if the row contains 3 of the same string" 
-			(let [board (make-board 9 "x") row (get-rows board [[1 2 3]])]
-				(should= true (row-taken-by? "x" board row)))))
+	(context "winning-move-available?"
+		(it "returns true if the row can be won by the player with the supplied marker" 
+			(should= true (winning-move-available-in-row? "x" ["x" "x" nil "o" "o" nil nil nil nil] [0 1 2])))
+		(it "returns false if the row cannot be won by the player with the supplied marker" 
+			(should= false (winning-move-available-in-row? "x" ["x" "x" "x" "o" "o" nil nil nil nil] [0 1 2])))
+		(it "returns false if the row cannot be won by the player with the supplied marker" 
+			(should= false (winning-move-available-in-row? "x" ["x" "o" nil nil nil nil nil nil nil] [0 1 2])))
+			
+		(it "returns false if no rows cannot be won by the player with the supplied marker" 
+			(should= false (winning-move-available? "x" ["x" nil nil nil "o" nil nil nil nil] (generate-winning-combinations)))
+			(should= true (winning-move-available? "x" ["x" "x" nil nil "o" nil nil nil nil] (generate-winning-combinations)))
+		)
+			
+	)
 	
 
 (run-specs)
