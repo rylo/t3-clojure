@@ -1,4 +1,4 @@
-(ns tictactoe.game_rules
+(ns tictactoe.game-rules
 	(:require [tictactoe.board :refer [get-marker get-markers row-taken? generate-winning-combinations set-marker full?]]))
 
 (defn winning-row-present? [board]

@@ -1,9 +1,9 @@
 (ns tictactoe.game-rules-spec
   (:require [speclj.core :refer :all]
 			[tictactoe.board :refer :all]
-            [tictactoe.game_rules :refer :all]))
+            [tictactoe.game-rules :refer :all]))
 
-(describe "game_rules"
+(describe "game-rules"
 	(context "game-over?"
 			(it "should return false if the game isn't over" 
 				(should= false (game-over? (make-board 9 nil))))
