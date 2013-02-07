@@ -1,6 +1,6 @@
 (ns tictactoe.player
 	(:require [tictactoe.io :refer [prompt]]
-			  [tictactoe.game_rules :refer [empty-spaces valid-move?]]
+			  [tictactoe.game-rules :refer [empty-spaces valid-move?]]
 			  [tictactoe.negamax :refer [get-best-move]]))
 
 (defprotocol Player
