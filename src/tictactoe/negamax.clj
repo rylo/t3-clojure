@@ -1,5 +1,5 @@
 (ns tictactoe.negamax
-	(:require [tictactoe.game_rules :refer :all]
+	(:require [tictactoe.game-rules :refer :all]
 			  [tictactoe.board :refer :all]
 			  [tictactoe.io :refer :all]))
 
@@ -25,9 +25,10 @@
 (defn score-empty-spaces [player-marker board]
 	(for [empty-space (empty-spaces board)
 		  :let [altered-board (set-marker board player-marker empty-space)]]
-				(if (winning-move-available? player-marker board (generate-winning-combinations)) 
-					(get-score player-marker altered-board)
-					(* -1 (apply max (flatten (negamax altered-board (alternate-player-marker player-marker) 1)))))))
+				(cond 
+					(winning-move-available? player-marker board (generate-winning-combinations)) (get-score player-marker altered-board)
+					(= (count (empty-spaces board)) 1) (get-score player-marker board)
+					:else (* -1 (apply max (flatten (negamax altered-board (alternate-player-marker player-marker) 1)))))))
 		
 (defn get-best-move [player-marker board] 
 	(key (apply max-key val (apply hash-map (interleave (empty-spaces board) (score-empty-spaces player-marker board))))))

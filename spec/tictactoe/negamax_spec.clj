@@ -1,20 +1,23 @@
 (ns tictactoe.negamax-spec
   (:require [speclj.core :refer :all]
 			[tictactoe.negamax :refer :all]
-			[tictactoe.game_rules :refer :all]))
+			[tictactoe.game-rules :refer :all]))
 
-(defn get-time-taken [time-string]
-	(Integer. (re-find #"[0-9]+" time-string)))
+; (defn get-time-taken [time-string]
+; 	(Integer. (re-find #"[0-9]+" time-string)))
+; 	
+; 	(it "should take less than 700ms to find an optimal move on an empty board"
+; 		(should (> 700 (get-time-taken (with-out-str (time (get-best-move "x" [nil nil nil nil nil nil nil nil nil])))))))
+; 	(it "should take less than 300ms to find an optimal move on a board with one spot taken"
+; 		(should (> 300 (get-time-taken (with-out-str (time (get-best-move "x" ["x" nil nil nil nil nil nil nil nil])))))))
 
 (context "UltimateComputer negamax"
 	(context "score-empty-spaces"
 		(it "should return an array of best moves"
 			(should= [50 100 50 50 100] (score-empty-spaces "x" ["x" "o" nil nil nil nil "x" "x" nil]))
-			(should= [50 50 50 100] (score-empty-spaces "o" ["x" nil "x" nil "x" nil "o" nil "o"])))
-		(it "should take less than 700ms to find an optimal move on an empty board"
-			(should (> 700 (get-time-taken (with-out-str (time (get-best-move "x" [nil nil nil nil nil nil nil nil nil])))))))
-		(it "should take less than 300ms to find an optimal move on a board with one spot taken"
-			(should (> 300 (get-time-taken (with-out-str (time (get-best-move "x" ["x" nil nil nil nil nil nil nil nil]))))))))
+			(should= [50 50 50 100] (score-empty-spaces "o" ["x" nil "x" nil "x" nil "o" nil "o"]))
+			(should= [0] (score-empty-spaces "x" [nil "o" "x" "x" "o" "o" "o" "x" "x"]))
+			))
 			
 	(context "get-best-move"
 		(it "should return the space index of the optimal move"
