@@ -1,7 +1,7 @@
 (ns tictactoe.player-spec
   (:require [speclj.core :refer :all]
             [tictactoe.player :refer :all]
-			[tictactoe.game_rules :refer :all]
+			[tictactoe.game-rules :refer :all]
 			[tictactoe.board :refer :all]))
 
 (describe "Player"
