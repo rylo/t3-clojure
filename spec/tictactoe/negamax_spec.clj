@@ -16,8 +16,7 @@
 		(it "should return an array of best moves"
 			(should= [50 100 50 50 100] (score-empty-spaces "x" ["x" "o" nil nil nil nil "x" "x" nil]))
 			(should= [50 50 50 100] (score-empty-spaces "o" ["x" nil "x" nil "x" nil "o" nil "o"]))
-			(should= [0] (score-empty-spaces "x" [nil "o" "x" "x" "o" "o" "o" "x" "x"]))
-			))
+			(should= [0] (score-empty-spaces "x" [nil "o" "x" "x" "o" "o" "o" "x" "x"]))))
 			
 	(context "get-best-move"
 		(it "should return the space index of the optimal move"
@@ -26,7 +25,8 @@
 			(should= 2 (get-best-move "o" ["x" "x" nil nil nil nil "o" nil nil]))
 			(should= 6 (get-best-move "o" [nil nil "x" nil "x" nil nil nil "o"]))
 			(should= 7 (get-best-move "o" ["x" nil "x" nil "x" nil "o" nil "o"]))
-			(should= 4 (get-best-move "o" ["x" nil nil nil nil nil nil nil nil]))))
+			(should= 4 (get-best-move "o" ["x" nil nil nil nil nil nil nil nil]))
+			(should= 6 (get-best-move "o" [nil nil nil "x" nil nil nil nil nil]))))
 
 	(context "get-score"
 		(it "should return a number score based on the state of the board"
