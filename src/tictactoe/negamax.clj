@@ -18,7 +18,7 @@
 (defn negamax [board player-marker depth]
 	(for [empty-space (empty-spaces board)
 		:let[altered-board (set-marker board player-marker empty-space)]]
-			(if (or (game-over? altered-board) (= depth 4))
+			(if (or (game-over? altered-board) (= depth 5))
 				(int (/ (get-score player-marker altered-board) depth))
 				(* -1 (apply max (flatten (negamax altered-board (alternate-player-marker player-marker) (inc depth))))))))
 
