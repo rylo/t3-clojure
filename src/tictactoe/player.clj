@@ -3,6 +3,9 @@
 			  [tictactoe.game-rules :refer [empty-spaces valid-move?]]
 			  [tictactoe.negamax :refer [get-best-move]]))
 
+(defn is-human? [player]
+  (re-find #"Human" (str (class player))))
+
 (defprotocol Player
 	(marker [this])
 	(get-move [this board]))

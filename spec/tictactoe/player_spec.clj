@@ -14,6 +14,11 @@
 	
 	(it "has a marker"
 		(should= "x" (:marker human-player)))
+    
+  (it "tells us if the player is human or not"
+    (should (is-human? human-player))
+    (should-not (is-human? easy-computer-player))
+    (should-not (is-human? ultimate-computer-player)))
 
 	(context "Human Player"
 		(context "get-move"

@@ -2,7 +2,7 @@
 	(:require [tictactoe.player :refer :all]
 			  [tictactoe.board :refer [make-board]]
 			  [tictactoe.io :refer :all]))
-	
+
 (defn get-computer-difficulty [marker] 
 	(case (prompt (str "Please select a difficulty level for AI \"" marker "\":\n  1 - Easy Computer\n  2 - Ultimate Computer"))
 		"1" (tictactoe.player.EasyComputer. marker)
@@ -11,7 +11,7 @@
 
 (defn get-player-config []	
 	(case (prompt "How many human players?")
-			"0" [(get-computer-difficulty "x") (get-computer-difficulty "o")]
+      "0" [(get-computer-difficulty "x") (get-computer-difficulty "o")]
 			"1" [(tictactoe.player.Human. "x") (get-computer-difficulty "o")]
 			"2" [(tictactoe.player.Human. "x") (tictactoe.player.Human. "o")]
 			(get-player-config)))
